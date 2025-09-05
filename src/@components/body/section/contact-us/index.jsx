@@ -8,7 +8,7 @@ const ContactUsSection = () => {
                 <img src={fotoContractur} />
             </div>
             <div className='text-contact'>
-                <a target="_blank " href='https://api.whatsapp.com/send?phone=6289601961928'>Contact Us</a>
+                <a target="_blank " href='https://api.whatsapp.com/send?phone=082124014720'>Contact Us</a>
             </div>
         </section>
     )
