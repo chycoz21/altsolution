@@ -1,0 +1,42 @@
+:root {
+  font-family: 'Poppins';
+
+}
+
+body {
+  margin: 0px;
+}
+
+p,
+h2,
+h1,
+h3,
+h4,
+h5 {
+  margin: 0px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 48px;
+  color: #F58322;
+}
+
+@media(max-width:700px) {
+  .marg-all {
+    padding: 30px 26px !important;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+}
+
+
+
+.marg-all {
+  padding: 50px 40px;
+}

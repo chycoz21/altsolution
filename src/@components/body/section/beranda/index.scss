@@ -1,0 +1,303 @@
+// Modern Hero Section Styles
+.hero-container {
+  position: relative;
+  overflow: hidden;
+
+  .hero-slider {
+    position: relative;
+
+    .slick-dots {
+      bottom: 40px;
+      z-index: 40;
+
+      li {
+        margin: 0 6px;
+
+        button {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.3);
+          border: 2px solid rgba(255, 255, 255, 0.5);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+          &::before {
+            display: none;
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: scale(1.1);
+          }
+        }
+
+        &.slick-active {
+          button {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border-color: #f97316;
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+          }
+        }
+      }
+    }
+
+    .slick-track {
+      display: flex;
+      align-items: center;
+    }
+
+    .slick-slide {
+      position: relative;
+
+      > div {
+        height: 100vh;
+        min-height: 600px;
+      }
+    }
+  }
+
+  .hero-slide {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    // Ken Burns effect for images
+    &.slick-active img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Custom animations
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+// Enhanced responsive design
+@media (max-width: 1024px) {
+  .hero-container {
+    .hero-slide {
+      h1 {
+        font-size: 3rem !important;
+        line-height: 1.1;
+      }
+
+      p {
+        font-size: 1.125rem !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    .hero-slider {
+      .slick-dots {
+        bottom: 30px;
+
+        li {
+          margin: 0 4px;
+
+          button {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+
+    .hero-slide {
+      h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+      }
+
+      p {
+        font-size: 1rem !important;
+        margin-top: 1rem !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-container {
+    .hero-slide {
+      h1 {
+        font-size: 2rem !important;
+      }
+
+      p {
+        font-size: 0.9rem !important;
+      }
+    }
+  }
+}
+
+// Enhanced mobile navigation
+@media (max-width: 1023px) {
+  .hero-container {
+    header {
+      nav {
+        &.block {
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+
+          a {
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+              );
+              transition: left 0.5s;
+            }
+
+            &:hover::before {
+              left: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Glassmorphism effects
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+// Enhanced focus states
+button:focus,
+a:focus {
+  outline: 2px solid rgba(249, 115, 22, 0.5);
+  outline-offset: 2px;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Enhanced gradient backgrounds
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+// Custom scrollbar for webkit browsers
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ea580c, #dc2626);
+}
+
+// Performance optimizations
+.hero-slide img {
+  will-change: transform;
+}
+
+.hero-slider .slick-dots li button {
+  will-change: transform, background, border-color;
+}
+
+// Dark mode support (optional)
+@media (prefers-color-scheme: dark) {
+  .hero-container {
+    header {
+      &.scrolled {
+        background: rgba(17, 24, 39, 0.95);
+
+        a {
+          color: white;
+
+          &:hover {
+            color: #f97316;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce,
+  .animate-fade-in-up,
+  .animate-gradient {
+    animation: none;
+  }
+
+  .hero-slide img {
+    transition: none;
+  }
+
+  .hero-slider .slick-dots li button {
+    transition: none;
+  }
+}

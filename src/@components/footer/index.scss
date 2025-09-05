@@ -1,0 +1,18 @@
+.container-foot {
+  background: #f97316;
+  padding: 8px 16px;
+
+  .text-foot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 21px;
+      color: white;
+      margin: 0;
+    }
+  }
+}

@@ -1,0 +1,611 @@
+// import React, { useRef, useState, useEffect } from "react";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import { heroSection } from "../../../data/dami-data";
+// import "./index.scss";
+
+// const HeroSection = () => {
+//   const [windowWidth, setWindowWidth] = useState(
+//     typeof window !== "undefined" ? window.innerWidth : 1200
+//   );
+//   //   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+//   // Settings for slider
+//   const settings = {
+//     dots: true,
+//     infinite: true,
+//     speed: 500,
+//     slidesToShow: 1,
+//     slidesToScroll: 1,
+//     autoplay: true,
+//     autoplaySpeed: 5000,
+//     arrows: false,
+//     adaptiveHeight: true,
+//   };
+
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setWindowWidth(window.innerWidth);
+//     };
+
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, []);
+
+//   return (
+//     <div className="hero-wrapper">
+//       {/* Navigation Header */}
+
+//       {/* Hero Slider */}
+//       <div className="hero-slider-container">
+//         <Slider {...settings}>
+//           {heroSection.map((item, index) => (
+//             <div key={index} className="hero-slide">
+//               <div className="slide-image-container">
+//                 <img
+//                   src={windowWidth > 768 ? item.img : item.imgMobile}
+//                   alt={`Slide ${index + 1}`}
+//                   className="slide-image"
+//                 />
+//                 <div className="image-overlay"></div>
+//               </div>
+
+//               <div className="slide-content">
+//                 <h1>Engineering Excellence</h1>
+//                 <h2>Building Indonesia's Future</h2>
+//                 <p>
+//                   PT ALTINDO MITRA PERKASA - Your trusted partner in
+//                   construction and engineering
+//                 </p>
+
+//                 <div className="button-group">
+//                   <a href="#about" className="primary-button">
+//                     Learn More
+//                   </a>
+//                   <a href="#contact" className="secondary-button">
+//                     Contact Us
+//                   </a>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </Slider>
+
+//         {/* Stats Badge */}
+//         <div className="stats-badge">
+//           <div className="stats-icon">
+//             <svg
+//               xmlns="http://www.w3.org/2000/svg"
+//               viewBox="0 0 20 20"
+//               fill="currentColor"
+//             >
+//               <path
+//                 fillRule="evenodd"
+//                 d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+//                 clipRule="evenodd"
+//               />
+//             </svg>
+//           </div>
+//           <div className="stats-text">
+//             <span>50+</span>
+//             <p>Successful Projects</p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default HeroSection;
+import { Box, Button, Flex, Heading, Image, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import "./index.scss";
+
+import heroImg1 from "../../../data/images/img-project/Fabrication.jpg";
+import heroImg2 from "../../../data/images/img-project/Contruction.jpg";
+import heroImg3 from "../../../data/images/img-project/Furniture.jpg";
+
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
+const MotionImage = motion(Image);
+
+const images = [heroImg1, heroImg2, heroImg3];
+
+const HeroSection = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <MotionBox
+      className="hero-section"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
+      <MotionFlex
+        direction={{ base: "column", md: "row" }}
+        align="center"
+        justify="space-between"
+        className="hero-container"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 1 }}
+      >
+        <MotionBox
+          flex="1"
+          className="hero-text"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        >
+          <Text className="tagline">ENGINEERING EXCELLENCE</Text>
+          <Heading className="main-heading">
+            Building Indonesian's Future <br />
+            <span>PT Altindo Mitra Perkasa</span>
+          </Heading>
+          <Text className="description">
+            You Trusted Partner in Construction and Engineering
+          </Text>
+
+          <Wrap spacing="10px" mt={4}>
+            {["General Tranding", "Fabrication", "Machining", "Interior", "Construction", "Electrical", "Security System"].map((item, idx) => (
+              <WrapItem key={idx}>
+                <Button className="main-button" variant="outline" colorScheme="orange">
+                  {item}
+                </Button>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </MotionBox>
+
+        <MotionBox
+          flex="1"
+          className="hero-image-wrapper"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.7, duration: 1 }}
+        >
+          <AnimatePresence mode="wait">
+            <MotionImage
+              key={currentImage}
+              src={images[currentImage]}
+              alt="Hero"
+              className="hero-image"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.8 }}
+              rounded="md"
+              w="full"
+            />
+          </AnimatePresence>
+
+          <Box className="hero-stat-box">
+            <Flex justify="space-around" align="center">
+              <Box textAlign="center">
+                <Text className="stat-number">640+</Text>
+                <Text className="stat-label">Projects Completed</Text>
+              </Box>
+              <Box textAlign="center">
+                <Text className="stat-number">25+</Text>
+                <Text className="stat-label">Years of Experience</Text>
+              </Box>
+              <Box textAlign="center">
+                <Text className="stat-number">450+</Text>
+                <Text className="stat-label">Happy Customers</Text>
+              </Box>
+            </Flex>
+          </Box>
+        </MotionBox>
+      </MotionFlex>
+    </MotionBox>
+  );
+};
+
+export default HeroSection;
+
+
+// .hero-wrapper {
+//   position: relative;
+//   width: 100%;
+//   overflow: hidden;
+
+//   .hero-nav {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     z-index: 50;
+//     padding: 1rem 0;
+//     background: transparent;
+//     transition: all 0.3s ease;
+
+//     .nav-container {
+//       max-width: 1200px;
+//       margin: 0 auto;
+//         padding: 0 1.5rem;
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+
+//       .nav-logo {
+//         img {
+//           height: 2.5rem;
+//           width: auto;
+//         }
+//       }
+
+//       .mobile-menu-button {
+//         display: none;
+//         background: none;
+//         border: none;
+//         color: white;
+//         cursor: pointer;
+
+//         @media (max-width: 1023px) {
+//           display: block;
+//         }
+//       }
+
+//       .nav-links {
+//         display: flex;
+//         align-items: center;
+//         gap: 1.5rem;
+
+//         a {
+//           color: white;
+//           font-weight: 500;
+//           transition: color 0.2s;
+//           text-decoration: none;
+
+//           &:hover {
+//             color: #f97316;
+//           }
+//         }
+
+//         .cta-button {
+//           background: #f97316;
+//           color: white;
+//           padding: 0.5rem 1.25rem;
+//           border-radius: 9999px;
+//           transition: background 0.2s;
+
+//           &:hover {
+//             background: #ea580c;
+//             color: white;
+//           }
+//         }
+
+//         @media (max-width: 1023px) {
+//           display: none;
+//           flex-direction: column;
+//           position: absolute;
+//           top: 100%;
+//           left: 0;
+//           right: 0;
+//           background: rgba(0, 0, 0, 0.95);
+//           padding: 1.5rem;
+//           gap: 1rem;
+
+//           &.open {
+//             display: flex;
+//           }
+
+//           a {
+//             padding: 0.5rem 0;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   .hero-slider-container {
+//     position: relative;
+//     width: 100%;
+//     height: 100vh;
+//     min-height: 600px;
+
+//     .hero-slide {
+//       position: relative;
+//       height: 100vh;
+//       min-height: 600px;
+
+//       .slide-image-container {
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         right: 0;
+//         bottom: 0;
+
+//         .slide-image {
+//           width: 100%;
+//           height: 100%;
+//           object-fit: cover;
+//         }
+
+//         .image-overlay {
+//           position: absolute;
+//           top: 0;
+//           left: 0;
+//           right: 0;
+//           bottom: 0;
+//           background: rgba(0, 0, 0, 0.4);
+//         }
+//       }
+
+//       .slide-content {
+//         position: relative;
+//         z-index: 10;
+//         height: 100%;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//         text-align: center;
+//         color: white;
+//         padding: 0 1.5rem;
+//         max-width: 1200px;
+//         margin: 0 auto;
+
+//         h1 {
+//           font-size: 3rem;
+//           font-weight: 700;
+//           margin-bottom: 0.5rem;
+//           line-height: 1.2;
+
+//           @media (min-width: 768px) {
+//             font-size: 4rem;
+//           }
+//         }
+
+//         h2 {
+//           font-size: 1.5rem;
+//           font-weight: 600;
+//           margin-bottom: 1.5rem;
+
+//           @media (min-width: 768px) {
+//             font-size: 2rem;
+//           }
+//         }
+
+//         p {
+//           font-size: 1.125rem;
+//           max-width: 600px;
+//           margin-bottom: 2rem;
+//           opacity: 0.9;
+//         }
+
+//         .button-group {
+//           display: flex;
+//           gap: 1rem;
+//           flex-wrap: wrap;
+//           justify-content: center;
+
+//           .primary-button {
+//             background: #f97316;
+//             color: white;
+//             padding: 0.75rem 2rem;
+//             border-radius: 9999px;
+//             font-weight: 600;
+//             transition: all 0.2s;
+//             text-decoration: none;
+
+//             &:hover {
+//               background: #ea580c;
+//               transform: translateY(-2px);
+//             }
+//           }
+
+//           .secondary-button {
+//             background: transparent;
+//             color: white;
+//             padding: 0.75rem 2rem;
+//             border-radius: 9999px;
+//             font-weight: 600;
+//             transition: all 0.2s;
+//             text-decoration: none;
+//             border: 2px solid white;
+
+//             &:hover {
+//               background: white;
+//               color: #1f2937;
+//               transform: translateY(-2px);
+//             }
+//           }
+//         }
+//       }
+//     }
+
+//     .slick-dots {
+//       bottom: 2rem;
+
+//       li {
+//         margin: 0 0.25rem;
+
+//         button {
+//           &::before {
+//             color: white;
+//             opacity: 0.5;
+//             font-size: 0.75rem;
+//           }
+//         }
+
+//         &.slick-active {
+//           button::before {
+//             color: #f97316;
+//             opacity: 1;
+//           }
+//         }
+//       }
+//     }
+
+//     .stats-badge {
+//       position: absolute;
+//       bottom: 2rem;
+//       left: 2rem;
+//       background: rgba(0, 0, 0, 0.7);
+//       padding: 1rem;
+//       border-radius: 0.5rem;
+//       display: flex;
+//       align-items: center;
+//       z-index: 1;
+
+//       @media (max-width: 768px) {
+//         display: none;
+//       }
+
+//       .stats-icon {
+//         svg {
+//           width: 2rem;
+//           height: 2rem;
+//           color: #f97316;
+//         }
+//       }
+
+//       .stats-text {
+//         margin-left: 0.75rem;
+
+//         span {
+//           font-size: 2.25rem;
+//           font-weight: 700;
+//           color: white;
+//           line-height: 1;
+//         }
+
+//         p {
+//           margin-top: 0.25rem;
+//           color: white;
+//           opacity: 0.9;
+//           font-size: 0.875rem;
+//         }
+//       }
+//     }
+//   }
+// }
+
+
+
+
+
+
+//new style
+// .hero-section {
+//   padding: 3rem 2rem;
+//   background: #f9f9f9;
+
+//   .hero-container {
+//     max-width: 1200px;
+//     margin: 0 auto;
+//     padding-top: 8rem;
+//     gap: 2rem;
+//   }
+
+//   .hero-text {
+//     .tagline {
+//       color: #f97316;
+//       font-weight: bold;
+//       font-size: 14px;
+//     }
+
+//     .main-heading {
+//       font-size: 2.5rem;
+//       font-weight: 700;
+//       margin: 1rem 0;
+//       color:#17044d;
+
+//       span {
+//         color: #f97316;
+//       }
+//     }
+
+//     .description {
+//       color: #444;
+//       font-size: 1rem;
+//       max-width: 500px;
+//     }
+//   }
+
+//   .hero-image-wrapper {
+//     position: relative;
+//     width: 100%;
+
+//     .hero-image {
+//       width: 100%;
+//       max-height: 350px;
+//       border-radius: 12px;
+//       object-fit: cover;
+//     }
+
+//     .hero-stat-box {
+//       position: absolute;
+//       bottom: -20px;
+//       left: 50%;
+//       transform: translateX(-50%);
+//       background: #f97316;
+//       color: white;
+//       padding: 1rem 2rem;
+//       border-radius: 12px;
+//       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+//       width: 90%;
+//       max-width: 500px;
+
+//       .stat-number {
+//         font-weight: bold;
+//         font-size: 1.5rem;
+//       }
+
+//       .stat-label {
+//         font-size: 0.85rem;
+//       }
+//     }
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .hero-section {
+//     .hero-container {
+//       padding-top: 4rem;
+//       gap: 1rem;
+//     }
+
+//     .hero-text {
+//       .main-heading {
+//         font-size: 1.5rem;
+//       }
+
+//       .description {
+//         font-size: 1rem;
+//       }
+
+//       .main-button {
+//         padding: 0.25rem 0.5rem;
+//         font-size: 10px;
+//       }
+//     }
+
+//     .hero-image-wrapper {
+//       .hero-image {
+//         max-height: 170px;
+//       }
+
+//       .hero-stat-box {
+//         padding: 0.50rem 1rem;
+//         .stat-number {
+//           font-size: 1rem;
+//         }
+
+//         .stat-label {
+//           font-size: 0.55rem;
+//         }
+//       }
+//     }
+//   }
+// }
