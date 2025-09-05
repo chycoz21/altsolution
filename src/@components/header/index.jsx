@@ -46,10 +46,10 @@ const [activeSection, setActiveSection] = useState("");
         <img src={Logo} alt="Logo PT" />
         <div className="contact">
           <p>
-            <FiMail /> atlindo@example.com
+            <FiMail /> altindomitraperkasa@altindomp.co.id
           </p>
           <p>
-            <FiPhone /> 0812-3456-7890
+            <FiPhone /> 0821-2401-4720
           </p>
         </div>
       </div>

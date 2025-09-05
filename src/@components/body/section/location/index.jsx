@@ -25,10 +25,18 @@ const LocationSection= () => {
               <a
                 className="telp"
                 target="_blank "
-                href="https://api.whatsapp.com/send?phone=6289601961928"
+                href="https://api.whatsapp.com/send?phone=082124014720"
               >
-                0896-0196-1928
+                0821-2401-4720
               </a>
+              <span>Email</span>
+              <a
+                className="telp"
+                target="_blank "
+                href="mailto:altindomitraperkasa@altindomp.co.id"
+              >
+                altindomitraperkasa@altindomp.co.id
+              </a>              
             </div>
             <div className="text-col sosial-media">
               <span>Sosial Media</span>
@@ -109,10 +117,18 @@ const LocationSection= () => {
               <a
                 className="telp"
                 target="_blank "
-                href="https://api.whatsapp.com/send?phone=6289601961928"
+                href="https://api.whatsapp.com/send?phone=082124014720"
               >
-                0896-0196-1928
+                0821-2401-4720
               </a>
+              <span>Email</span>
+              <a
+                className="telp"
+                target="_blank "
+                href="mailto:altindomitraperkasa@altindomp.co.id"
+              >
+                altindomitraperkasa@altindomp.co.id
+              </a> 
             </div>
             <div className="text-col sosial-media">
               <span>Sosial Media</span>
